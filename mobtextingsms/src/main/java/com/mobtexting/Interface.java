@@ -12,9 +12,10 @@ public interface Interface {
     @FormUrlEncoded
     @POST("/sp/index.php")
     Call<ServerResponse> post(
-            @Field("method") String method,
-            @Field("username") String username,
-            @Field("password") String password
+            @Field("api_key") String method,
+            @Field("message") String username,
+            @Field("mobile_no") String password,
+            @Field("sender_id") String sender_id
     );
 
     @GET("/sp/index.php")

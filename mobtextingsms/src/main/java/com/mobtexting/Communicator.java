@@ -16,9 +16,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Communicator {
     private static  final String TAG = "Communicator";
-    private static final String SERVER_URL = "http://www.sample.al";
+    private static final String SERVER_URL = "http://api.mobtexting.com/v1/sms";
 
-    public void loginPost(String username, String password){
+    public void loginPost(String apikey, String message,String mobile_no,String senderId){
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -33,7 +33,7 @@ public class Communicator {
 
         Interface service = retrofit.create(Interface.class);
 
-        Call<ServerResponse> call = service.post("login",username,password);
+        Call<ServerResponse> call = service.post(apikey,message,mobile_no,senderId);
 
         call.enqueue(new Callback<ServerResponse>() {
             @Override

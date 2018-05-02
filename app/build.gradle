@@ -27,6 +27,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //networking volley library
     implementation 'com.android.volley:volley:1.1.0'
-    implementation 'com.github.mobtexting:mobtexting-android-sdk:5f792a64b9'
+    implementation 'com.github.mobtexting:mobtexting-android-sdk:a4c81ad31a'
     implementation 'com.msg91.sendotp.library:library:3.1'
 }
