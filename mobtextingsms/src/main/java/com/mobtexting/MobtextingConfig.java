@@ -1,6 +1,6 @@
 package com.mobtexting;
 
-public class Config {
+public class MobtextingConfig {
     public static String printText(String text){
         return text;
     }
