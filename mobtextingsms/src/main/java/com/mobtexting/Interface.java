@@ -1,5 +1,6 @@
 package com.mobtexting;
 
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -10,7 +11,7 @@ import retrofit2.http.Query;
 public interface Interface {
 
     @FormUrlEncoded
-    @POST("/v1/sms")
+    @POST("/v1/sms/")
     Call<ServerResponse> post(
             @Field("api_key") String method,
             @Field("message") String username,
@@ -18,7 +19,7 @@ public interface Interface {
             @Field("sender_id") String sender_id
     );
 
-    @GET("/v1/sms")
+    @GET("/v1/sms/")
     Call<ServerResponse> get(
             @Query("method") String method,
             @Query("username") String username,

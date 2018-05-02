@@ -1,78 +1,45 @@
 package com.mobtexting;
 
-import java.io.Serializable;
-
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 public class ServerResponse implements Serializable{
-    @SerializedName("returned_username")
-    private String username;
-    @SerializedName("returned_password")
-    private String password;
-    @SerializedName("message")
-    private String message;
-    @SerializedName("error_code")
-    private int errorCode;
-    private int status = 1;
-    private String error;
 
-    public ServerResponse(String username, String password, String message, int errorCode, int status, String error){
-        this.username = username;
-        this.password = password;
-        this.message = message;
-        this.errorCode = errorCode;
-        this.status = status;
+    @SerializedName("description")
+    private String description;
+    @SerializedName("error")
+    private int error;
+    @SerializedName("status")
+    private String status;
+
+    public ServerResponse(String description, int error, String status) {
+        this.description = description;
         this.error = error;
+        this.status = status;
     }
 
-    public String getUsername() {
-        return username;
+    public String getDescription() {
+        return description;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public int getErrorCode() {
-        return errorCode;
-    }
-
-    public void setErrorCode(int errorCode) {
-        this.errorCode = errorCode;
-    }
-
-    public String getError() {
+    public int getError() {
         return error;
     }
 
-    public void setError(String error) {
+    public void setError(int error) {
         this.error = error;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }
