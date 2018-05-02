@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         communicator=new Communicator();
-        communicator.loginPost("test","123");
+        communicator.loginPost("sdfsdfsfsdfsdf","dsfsdfsdf","7250705072","MOBTXT");
     }
 
     @Subscribe

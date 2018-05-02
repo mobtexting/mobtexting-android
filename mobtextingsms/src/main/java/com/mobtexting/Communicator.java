@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Communicator {
     private static  final String TAG = "Communicator";
-    private static final String SERVER_URL = "http://api.mobtexting.com/v1/sms";
+    private static final String SERVER_URL = "http://api.mobtexting.com";
 
     public void loginPost(String apikey, String message,String mobile_no,String senderId){
 

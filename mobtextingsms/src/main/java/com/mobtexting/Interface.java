@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 public interface Interface {
 
     @FormUrlEncoded
-    @POST("/sp/index.php")
+    @POST("/v1/sms")
     Call<ServerResponse> post(
             @Field("api_key") String method,
             @Field("message") String username,
@@ -18,7 +18,7 @@ public interface Interface {
             @Field("sender_id") String sender_id
     );
 
-    @GET("/sp/index.php")
+    @GET("/v1/sms")
     Call<ServerResponse> get(
             @Query("method") String method,
             @Query("username") String username,
