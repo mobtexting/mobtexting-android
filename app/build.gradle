@@ -26,7 +26,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation 'com.github.mobtexting:mobtexting-android-sdk:v1.0.1-alpha'
+    implementation 'com.github.mobtexting:mobtexting-android-sdk:83db744ef5'
     implementation 'com.msg91.sendotp.library:library:3.1'
 
 

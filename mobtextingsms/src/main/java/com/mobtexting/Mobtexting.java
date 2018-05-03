@@ -79,7 +79,8 @@ public class Mobtexting {
 
                 Interface service = retrofit.create(Interface.class);
 
-                Call<ServerResponse> call = service.post(api_key1, message, mobile_no, sender_id,flashSend);
+                int flashSet=flashSend==true?1:0;
+                Call<ServerResponse> call = service.post(api_key1, message, mobile_no, sender_id,flashSet);
 
                 call.enqueue(new Callback<ServerResponse>() {
                     @Override

@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements MobtextingInterfa
         setContentView(R.layout.activity_main);
 
         mobtexting=new Mobtexting(this);
+        mobtexting.setFlashMessageSend(true);
         mobtexting.sendSMS("This is a test","7488792140",this);
     }
 
