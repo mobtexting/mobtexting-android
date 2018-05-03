@@ -1,22 +1,31 @@
 package com.mobtexting;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
+import java.util.List;
 
-public class ServerResponse implements Serializable{
+public class ServerResponse {
 
+    @Expose
+    @SerializedName("sms_id")
+    private List<String> smsId;
+    @Expose
     @SerializedName("description")
     private String description;
+    @Expose
     @SerializedName("error")
     private int error;
+    @Expose
     @SerializedName("status")
     private String status;
 
-    public ServerResponse(String description, int error, String status) {
-        this.description = description;
-        this.error = error;
-        this.status = status;
+    public List<String> getSmsId() {
+        return smsId;
+    }
+
+    public void setSmsId(List<String> smsId) {
+        this.smsId = smsId;
     }
 
     public String getDescription() {

@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data android:name="mobtexting.api_key" android:value="@string/mobtextingapikey" />
+        <meta-data android:name="mobtexting.sender_id" android:value="@string/mobtextingsenderid" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

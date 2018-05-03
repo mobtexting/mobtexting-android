@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">mobtexting-android-sdk</string>
-    <string name="mobtextingapikey">gdfgdgdfgfd</string>
+    <string name="mobtextingapikey">sadasdasd</string>
+    <string name="mobtextingsenderid">sadasd</string>
 </resources>

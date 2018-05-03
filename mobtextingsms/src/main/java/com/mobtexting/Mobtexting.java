@@ -24,25 +24,35 @@ public class Mobtexting {
     private static final String TAG = "Communicator";
     private static final String SERVER_URL = "http://api.mobtexting.com";
     private Retrofit retrofit;
-    private String api_key1,sender_id;
+    private String api_key1, sender_id;
     private Context context;
 
-    public Mobtexting(Context context){
-        this.context=context;
+    /**
+     * @param context
+     */
+    public Mobtexting(Context context) {
+        this.context = context;
     }
 
+    /**
+     * send SMS using POST method
+     *
+     * @param message
+     * @param mobile_no
+     * @param mobtextingInterface
+     */
     public void sendSMS(String message, String mobile_no, final MobtextingInterface mobtextingInterface) {
         try {
             ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
             Bundle bundle = ai.metaData;
-            api_key1= bundle.getString("mobtexting.api_key");
-            sender_id= bundle.getString("mobtexting.sender_id");
-        }catch (Exception e){
+            api_key1 = bundle.getString("mobtexting.api_key");
+            sender_id = bundle.getString("mobtexting.sender_id");
+        } catch (Exception e) {
             mobtextingInterface.onError(new ModelError("100", "API key", "Dear developer. Don't forget to configure <meta-data android:name=\"mobtexting.api_key\" android:value=\"testValue\"/> in your AndroidManifest.xml file."));
             return;
         }
-        if(api_key1!=null&&!api_key1.equals("")) {
-            if(sender_id!=null&&!sender_id.equals("")) {
+        if (api_key1 != null && !api_key1.equals("")) {
+            if (sender_id != null && !sender_id.equals("")) {
                 HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
                 logging.setLevel(HttpLoggingInterceptor.Level.BODY);
                 OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
@@ -82,46 +92,12 @@ public class Mobtexting {
                         mobtextingInterface.onError(new ModelError("500", "No Internet", "Check your internet connection!"));
                     }
                 });
-            }else{
+            } else {
                 mobtextingInterface.onError(new ModelError("100", "Sender ID", "Dear developer. Don't forget to configure <meta-data android:name=\"mobtexting.sender_id\" android:value=\"testValue\"/> in your AndroidManifest.xml file."));
             }
-        }else{
+        } else {
             mobtextingInterface.onError(new ModelError("100", "API key", "Dear developer. Don't forget to configure <meta-data android:name=\"mobtexting.api_key\" android:value=\"testValue\"/> in your AndroidManifest.xml file."));
         }
     }
-
-    /*public void loginGet(String username, String password) {
-
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        httpClient.addInterceptor(logging);
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .client(httpClient.build())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(SERVER_URL)
-                .build();
-
-        Interface service = retrofit.create(Interface.class);
-
-        Call<ServerResponse> call = service.get("login", username, password);
-
-        call.enqueue(new Callback<ServerResponse>() {
-            @Override
-            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                // response.isSuccessful() is true if the response code is 2xx
-                Log.e(TAG, "Success");
-            }
-
-            @Override
-            public void onFailure(Call<ServerResponse> call, Throwable t) {
-                // handle execution failures like no internet connectivity
-                Log.d("internet",t.getMessage());
-            }
-        });
-    }*/
-
-
 }
 
