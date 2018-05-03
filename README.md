@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements MobtextingInterfa
         mobtexting=new Mobtexting(this);
         
         //send the SMS
-        mobtexting.sendSMS("This is a test","7488792140",this);
+        mobtexting.sendSMS("This is a test","7488******",this);
     }
 
     @Override
