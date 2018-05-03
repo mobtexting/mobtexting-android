@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements MobtextingInterfa
 
     @Override
     public void onResponse(ServerResponse serverResponse) {
-        Log.d("response",serverResponse.getStatus()+"  "+serverResponse.getDescription());
+        Log.d("response",serverResponse.getStatus()+"  "+serverResponse.getDescription()+"  "+serverResponse.getSmsId());
     }
 
     @Override
