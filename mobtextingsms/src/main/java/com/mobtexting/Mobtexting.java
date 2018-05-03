@@ -26,6 +26,17 @@ public class Mobtexting {
     private Retrofit retrofit;
     private String api_key1, sender_id;
     private Context context;
+    private boolean flashSend;
+
+    public boolean isFlashSend() {
+        return flashSend;
+    }
+
+    public void setFlashMessageSend(boolean flashSend) {
+        this.flashSend = flashSend;
+    }
+
+
 
     /**
      * @param context
@@ -33,6 +44,8 @@ public class Mobtexting {
     public Mobtexting(Context context) {
         this.context = context;
     }
+
+
 
     /**
      * send SMS using POST method
@@ -66,7 +79,7 @@ public class Mobtexting {
 
                 Interface service = retrofit.create(Interface.class);
 
-                Call<ServerResponse> call = service.post(api_key1, message, mobile_no, sender_id);
+                Call<ServerResponse> call = service.post(api_key1, message, mobile_no, sender_id,flashSend);
 
                 call.enqueue(new Callback<ServerResponse>() {
                     @Override

@@ -16,7 +16,8 @@ public interface Interface {
             @Field("api_key") String method,
             @Field("message") String username,
             @Field("mobile_no") String password,
-            @Field("sender_id") String sender_id
+            @Field("sender_id") String sender_id,
+            @Field("flash") boolean flashSend
     );
 
     @GET("/v1/sms/")
