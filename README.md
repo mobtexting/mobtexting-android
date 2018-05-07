@@ -129,6 +129,108 @@ public class OTPActivity extends AppCompatActivity {
     }
 }
 ```
+#### Usage (Auto verififcation OTP)
+**Step 1.** Create one Interface class like _SmsListener_
+```
+public interface SmsListener {
+    public void messageRceived(String messageText);
+}
+```
+**Step 2.** Create one Broadcast receiver class like _SmsReceiver_
+```
+public class SmsReceiver extends BroadcastReceiver{
+    private static SmsListener smsListener;
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        try {
+            Bundle data = intent.getExtras();
+
+            Object[] pdus = (Object[]) data.get("pdus");
+            for (int i = 0; i < pdus.length; i++) {
+                SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) pdus[i]);
+                String sender = smsMessage.getDisplayOriginatingAddress();
+                if (sender != null) {
+                    String messageBody = smsMessage.getMessageBody();
+                    String msgLower = messageBody.toLowerCase();
+                    smsListener.messageRceived(msgLower);
+                }
+            }
+        }catch (Exception e){
+            smsListener.messageRceived("something went wrong!");
+        }
+    }
+
+    public static void bindListener(SmsListener listener) {
+        smsListener = listener;
+    }
+```
+**Step 3.** Bind the interface to the _OTPActivity.class _
+```
+  @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_otp);
+
+        otpEditText = (EditText) findViewById(R.id.otpEditText);
+        btnVerify = (Button) findViewById(R.id.btnVerify);
+
+        //receive the 6 digit generated OTP from previous activity
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            otp = extras.getString("otp");
+        }
+
+        //sms receiver to auto verification
+        SmsReceiver.bindListener(new SmsListener() {
+            @Override
+            public void messageRceived(String messageText) {
+                try {
+                    String sixOTPDigit = extractDigits(messageText);
+                    otpEditText.setText(sixOTPDigit);
+                }catch (Exception e){
+                    Log.d("exception", "Something Went Wrong!");
+                }
+            }
+        });
+
+
+        //button click listener
+        btnVerify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //check the OTP verification
+                if ((otp != null) && (otp.equals(otpEditText.getText().toString().trim()))) {
+                    Log.d("verified","OTP verified successfully.");
+                }else{
+                    Log.d("verified","OTP verified not successfully");
+                }
+            }
+        });
+    }
+
+    /**
+     * extract digit from string
+     * @param in
+     * @return
+     */
+    public static String extractDigits(final String in) {
+        final Pattern p = Pattern.compile( "(\\d{6})" );
+        final Matcher m = p.matcher( in );
+        if ( m.find() ) {
+            return m.group( 0 );
+        }
+        return "";
+    }
+}
+```
+**Step 4.** register the broadcast receiver class in android manifest file xml
+```
+<receiver android:name=".receivers.SmsReceiver">
+    <intent-filter>
+      <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+    </intent-filter>
+</receiver>
+```
 #### Note: _Add Internet persmission in android mainfest file_
 ```
 <uses-permission android:name="android.permission.INTERNET" />
