@@ -164,7 +164,7 @@ public class SmsReceiver extends BroadcastReceiver{
         smsListener = listener;
     }
 ```
-**Step 3.** Bind the interface to the _OTPActivity class _
+**Step 3.** Bind the interface to the _OTPActivity class_
 ```
   @Override
     protected void onCreate(Bundle savedInstanceState) {
