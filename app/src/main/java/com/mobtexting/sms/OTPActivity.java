@@ -6,6 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.mobtexting.sms.receivers.SmsListener;
+import com.mobtexting.sms.receivers.SmsReceiver;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class OTPActivity extends AppCompatActivity {
     private EditText otpEditText;
@@ -26,6 +33,20 @@ public class OTPActivity extends AppCompatActivity {
             otp = extras.getString("otp");
         }
 
+        //sms receiver to auto verification
+        SmsReceiver.bindListener(new SmsListener() {
+            @Override
+            public void messageRceived(String messageText) {
+                try {
+                    String sixOTPDigit = extractDigits(messageText);
+                    otpEditText.setText(sixOTPDigit);
+                }catch (Exception e){
+                    Log.d("exception", "Something Went Wrong!");
+                }
+            }
+        });
+
+
         //button click listener
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,5 +59,19 @@ public class OTPActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    /**
+     * extract digit from string
+     * @param in
+     * @return
+     */
+    public static String extractDigits(final String in) {
+        final Pattern p = Pattern.compile( "(\\d{6})" );
+        final Matcher m = p.matcher( in );
+        if ( m.find() ) {
+            return m.group( 0 );
+        }
+        return "";
     }
 }
