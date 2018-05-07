@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements MobtextingInterfa
 ```
 
 #### Usage (how to verify OTP)
-**Step 1.** Generate six digit random OTP in MainActivity.class.
+**Step 1.** Generate six digit random OTP in _MainActivity class_.
 ```
 public class MainActivity extends AppCompatActivity implements MobtextingInterface{
     private Mobtexting mobtexting;
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements MobtextingInterfa
 }
 
 ```
-**Step 2.** After successful response, pass the generated OTP to OTPActivity.class.
+**Step 2.** After successful response, pass the generated OTP to _OTPActivity class_.
 
 ```
 public class OTPActivity extends AppCompatActivity {
@@ -164,7 +164,7 @@ public class SmsReceiver extends BroadcastReceiver{
         smsListener = listener;
     }
 ```
-**Step 3.** Bind the interface to the _OTPActivity.class _
+**Step 3.** Bind the interface to the _OTPActivity class _
 ```
   @Override
     protected void onCreate(Bundle savedInstanceState) {
