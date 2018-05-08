@@ -3,7 +3,7 @@ _Integrate android sdk to Send SMS from Mobtexting_
 ## __Getting Started__
 ### Gradle
 **Step 1.** Add the JitPack repository to your build file
-```
+```java
 allprojects {
   repositories {
     maven { url 'https://jitpack.io' }
@@ -11,19 +11,19 @@ allprojects {
 }
 ```
 **Step 2.** Add the dependency  
-```
+```java
 dependencies {
   implementation 'com.github.mobtexting:mobtexting-android:v1.0.3'
 }
 ```
 #### define _API KEY_ and _Sender_ ID in Manifest file inside Application tag
-```
+```xml
   <meta-data android:name="mobtexting.api_key" android:value="@string/mobtextingapikey" />
   <meta-data android:name="mobtexting.sender_id" android:value="@string/mobtextingsenderid" />
 ```
 #### Usage (send SMS)
 
-```
+```java
 public class MainActivity extends AppCompatActivity implements MobtextingInterface{
     private Mobtexting mobtexting;
     @Override
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements MobtextingInterfa
 
 #### Usage (how to verify OTP)
 **Step 1.** Generate six digit random OTP in _MainActivity class_.
-```
+```java
 public class MainActivity extends AppCompatActivity implements MobtextingInterface{
     private Mobtexting mobtexting;
     private String otp_sixdigit;
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements MobtextingInterfa
 ```
 **Step 2.** After successful response, pass the generated OTP to _OTPActivity class_.
 
-```
+```java
 public class OTPActivity extends AppCompatActivity {
     private EditText otpEditText;
     private Button btnVerify;
@@ -131,13 +131,13 @@ public class OTPActivity extends AppCompatActivity {
 ```
 #### Usage (Auto verififcation OTP)
 **Step 1.** Create one Interface class like _SmsListener_
-```
+```java
 public interface SmsListener {
     public void messageRceived(String messageText);
 }
 ```
 **Step 2.** Create one Broadcast receiver class like _SmsReceiver_
-```
+```java
 public class SmsReceiver extends BroadcastReceiver{
     private static SmsListener smsListener;
     @Override
@@ -165,7 +165,7 @@ public class SmsReceiver extends BroadcastReceiver{
     }
 ```
 **Step 3.** Bind the interface to the _OTPActivity class_
-```
+```java
   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -224,7 +224,7 @@ public class SmsReceiver extends BroadcastReceiver{
 }
 ```
 **Step 4.** register the broadcast receiver class in android manifest file xml
-```
+```xml
 <receiver android:name=".receivers.SmsReceiver">
     <intent-filter>
       <action android:name="android.provider.Telephony.SMS_RECEIVED" />
@@ -232,7 +232,7 @@ public class SmsReceiver extends BroadcastReceiver{
 </receiver>
 ```
 #### Note: _Add Internet persmission in android mainfest file_
-```
+```xml
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
